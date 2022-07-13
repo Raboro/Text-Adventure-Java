@@ -5,32 +5,43 @@ import java.util.Arrays;
 public class GameBoard {
     private final int WIDTH;
     private final int HEIGHT;
-    private String[][] player_map;
-    private String[][] hidden_map;
+    private final int LEVEL;
+    private String[][] player_board;
+    private String[][] hidden_board;
 
-    public GameBoard(int width, int height){
+    public GameBoard(int width, int height, int level){
         this.WIDTH = width;
         this.HEIGHT = height;
-        generateMaps();
+        this.LEVEL = level;
+        generateBoards();
+        fillHiddenBoard();
     }
 
-    private void generateMaps(){
-        player_map = new String[HEIGHT][WIDTH];
-        hidden_map = new String[HEIGHT][WIDTH];
+    private void generateBoards(){
+        player_board = new String[HEIGHT][WIDTH];
+        hidden_board = new String[HEIGHT][WIDTH];
 
-        for(int column = 0; column < player_map.length; column++){
-            for(int row = 0; row < player_map[0].length; row++){
-                player_map[column][row] = "---";
-                hidden_map[column][row] = "---";
+        for(int column = 0; column < player_board.length; column++){
+            for(int row = 0; row < player_board[0].length; row++){
+                player_board[column][row] = "---";
+                hidden_board[column][row] = "---";
             }
         }
 
-        player_map[0][0] = "-P-";
-        hidden_map[0][0] = "-P-";
+        player_board[0][0] = "-P-";
+        hidden_board[0][0] = "-P-";
+    }
+
+    private void fillHiddenBoard(){
+        getBoardElements();  
+    }
+
+    private void getBoardElements(){
+        //TODO implement Board Elements, which needs to be added to the hidden board on a random position
     }
 
     public void printPlayerBoard(){
-        for (String[] strings : player_map) {
+        for (String[] strings : player_board) {
             System.out.println(Arrays.toString(strings));
         }
     }
@@ -38,5 +49,4 @@ public class GameBoard {
     public int getWidth(){
         return WIDTH;
     }
-
 }

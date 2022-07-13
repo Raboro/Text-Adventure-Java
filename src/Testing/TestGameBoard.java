@@ -9,7 +9,7 @@ public class TestGameBoard {
     
     @Test
     public void TestGameBoardVar(){
-        GameBoard gB = new GameBoard(10, 10);
+        GameBoard gB = new GameBoard(10, 10, 1);
         Assert.assertEquals(gB.getWidth(), 10);
     }
 }
