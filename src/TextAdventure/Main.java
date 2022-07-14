@@ -11,8 +11,6 @@ public class Main {
             GameBoard gameBoard = new GameBoard(level*10, level*10, level);
             gameBoard.printPlayerBoard();
             break;
-            
-            
         }
     }
 }

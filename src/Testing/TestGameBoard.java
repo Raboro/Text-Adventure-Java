@@ -8,8 +8,8 @@ import TextAdventure.GameBoard;
 public class TestGameBoard {
     
     @Test
-    public void TestGameBoardVar(){
+    public void TestPlayerPositionZeroZero(){
         GameBoard gB = new GameBoard(10, 10, 1);
-        Assert.assertEquals(gB.getWidth(), 10);
+        Assert.assertEquals(gB.getPlayerPosition(), "-P-");
     }
 }

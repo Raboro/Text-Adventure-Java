@@ -1,6 +1,7 @@
 package TextAdventure;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class GameBoard {
     private final int WIDTH;
@@ -8,8 +9,6 @@ public class GameBoard {
     private final int LEVEL;
     private String[][] player_board;
     private String[][] hidden_board;
-    private String[] BoardElementsCurrentLevel;
-    private int[] BoardElementsCounterCurrentLevel;
 
     public GameBoard(int width, int height, int level){
         this.WIDTH = width;
@@ -35,71 +34,49 @@ public class GameBoard {
     }
 
     private void fillHiddenBoard(){
-        getBoardElements();  
-    }
+        final String[] BOARD_ELEMENTS = getCurrentLevel(BoardElements.BOARD_ELEMENTS);
+        final int[] BOARD_ELEMENT_COUNTER = getCurrentLevel(BoardElements.BOARD_ELEMENTS_COUNTER);
 
-    private void getBoardElements(){
-        switch(LEVEL){
-            case 1: 
-            BoardElementsCurrentLevel = BoardElements.getBoardElementsCurrentLevelOne();
-            BoardElementsCounterCurrentLevel = BoardElements.getBoardElementsCounterCurrentLevelOne();
-            break;
+        for(int element = 0; element<BOARD_ELEMENTS.length; element++){
+            for(int counter = 0; counter<BOARD_ELEMENT_COUNTER[element]; counter++){
 
-            case 2: 
-            BoardElementsCurrentLevel = BoardElements.getBoardElementsCurrentLevelTwo();
-            BoardElementsCounterCurrentLevel = BoardElements.getBoardElementsCounterCurrentLevelTwo();
-            break;
-
-            case 3: 
-            BoardElementsCurrentLevel = BoardElements.getBoardElementsCurrentLevelThree();
-            BoardElementsCounterCurrentLevel = BoardElements.getBoardElementsCounterCurrentLevelThree();
-            break;
-
-            case 4: 
-            BoardElementsCurrentLevel = BoardElements.getBoardElementsCurrentLevelFour();
-            BoardElementsCounterCurrentLevel = BoardElements.getBoardElementsCounterCurrentLevelFour();
-            break;
-
-            case 5: 
-            BoardElementsCurrentLevel = BoardElements.getBoardElementsCurrentLevelFive();
-            BoardElementsCounterCurrentLevel = BoardElements.getBoardElementsCounterCurrentLevelFive();
-            break;
-
-            case 6: 
-            BoardElementsCurrentLevel = BoardElements.getBoardElementsCurrentLevelSix();
-            BoardElementsCounterCurrentLevel = BoardElements.getBoardElementsCounterCurrentLevelSix();
-            break;
-
-            case 7: 
-            BoardElementsCurrentLevel = BoardElements.getBoardElementsCurrentLevelSeven();
-            BoardElementsCounterCurrentLevel = BoardElements.getBoardElementsCounterCurrentLevelSeven();
-            break;
-
-            case 8: 
-            BoardElementsCurrentLevel = BoardElements.getBoardElementsCurrentLevelEight();
-            BoardElementsCounterCurrentLevel = BoardElements.getBoardElementsCounterCurrentLevelEight();
-            break;
-
-            case 9: 
-            BoardElementsCurrentLevel = BoardElements.getBoardElementsCurrentLevelNine();
-            BoardElementsCounterCurrentLevel = BoardElements.getBoardElementsCounterCurrentLevelNine();
-            break;
-
-            case 10: 
-            BoardElementsCurrentLevel = BoardElements.getBoardElementsCurrentLevelTen();
-            BoardElementsCounterCurrentLevel = BoardElements.getBoardElementsCounterCurrentLevelTen();
-            break;
-            
+                // insert current element into empty space on hidden_board
+                int[] positions = getEmptySpaceFromBoard();
+                hidden_board[positions[0]][positions[1]] = BOARD_ELEMENTS[element];
+            }
         }
     }
 
+    private String[] getCurrentLevel(String[][] array){
+        return array[LEVEL];
+    }
+    
+    private int[] getCurrentLevel(int[][] array){
+        return array[LEVEL];
+    }
+    
+    //loop over random positions until one is empty
+    private int[] getEmptySpaceFromBoard(){
+        while(true){
+            Random randInt = new Random();
+
+            int column = randInt.nextInt(HEIGHT);
+            int row = randInt.nextInt(WIDTH);
+
+            if(hidden_board[column][row] == "---"){
+                int[] positions = {column, row};
+                return positions;
+            }
+        }
+    }
+    
     public void printPlayerBoard(){
         for (String[] strings : player_board) {
             System.out.println(Arrays.toString(strings));
         }
     }
 
-    public int getWidth(){
-        return WIDTH;
+    public String getPlayerPosition(){
+        return player_board[0][0];
     }
 }
