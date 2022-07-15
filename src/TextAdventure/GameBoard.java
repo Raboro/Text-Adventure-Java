@@ -10,20 +10,21 @@ public class GameBoard {
     private String[][] player_board;
     private String[][] hidden_board;
 
-    public GameBoard(int width, int height, int level){
+    public GameBoard(int width, int height, int level) {
         this.WIDTH = width;
         this.HEIGHT = height;
-        this.LEVEL = level;
+        this.LEVEL = level - 1;
+
         generateBoards();
         fillHiddenBoard();
     }
 
-    private void generateBoards(){
+    private void generateBoards() {
         player_board = new String[HEIGHT][WIDTH];
         hidden_board = new String[HEIGHT][WIDTH];
 
-        for(int column = 0; column < player_board.length; column++){
-            for(int row = 0; row < player_board[0].length; row++){
+        for (int column = 0; column < player_board.length; column++) {
+            for (int row = 0; row < player_board[0].length; row++) {
                 player_board[column][row] = "---";
                 hidden_board[column][row] = "---";
             }
@@ -33,12 +34,12 @@ public class GameBoard {
         hidden_board[0][0] = "-P-";
     }
 
-    private void fillHiddenBoard(){
+    private void fillHiddenBoard() {
         final String[] BOARD_ELEMENTS = getCurrentLevel(BoardElements.BOARD_ELEMENTS);
         final int[] BOARD_ELEMENT_COUNTER = getCurrentLevel(BoardElements.BOARD_ELEMENTS_COUNTER);
 
-        for(int element = 0; element<BOARD_ELEMENTS.length; element++){
-            for(int counter = 0; counter<BOARD_ELEMENT_COUNTER[element]; counter++){
+        for (int element = 0; element < BOARD_ELEMENTS.length; element++) {
+            for (int counter = 0; counter < BOARD_ELEMENT_COUNTER[element]; counter++) {
 
                 // insert current element into empty space on hidden_board
                 int[] positions = getEmptySpaceFromBoard();
@@ -47,36 +48,36 @@ public class GameBoard {
         }
     }
 
-    private String[] getCurrentLevel(String[][] array){
+    private String[] getCurrentLevel(String[][] array) {
         return array[LEVEL];
     }
-    
-    private int[] getCurrentLevel(int[][] array){
+
+    private int[] getCurrentLevel(int[][] array) {
         return array[LEVEL];
     }
-    
-    //loop over random positions until one is empty
-    private int[] getEmptySpaceFromBoard(){
-        while(true){
+
+    // loop over random positions until one is empty
+    private int[] getEmptySpaceFromBoard() {
+        while (true) {
             Random randInt = new Random();
 
             int column = randInt.nextInt(HEIGHT);
             int row = randInt.nextInt(WIDTH);
 
-            if(hidden_board[column][row] == "---"){
-                int[] positions = {column, row};
+            if (hidden_board[column][row] == "---") {
+                int[] positions = { column, row };
                 return positions;
             }
         }
     }
-    
-    public void printPlayerBoard(){
+
+    public void printPlayerBoard() {
         for (String[] strings : player_board) {
             System.out.println(Arrays.toString(strings));
         }
     }
 
-    public String getPlayerPosition(){
+    public String getPlayerPosition() {
         return player_board[0][0];
     }
 }
