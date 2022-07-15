@@ -109,4 +109,12 @@ public class Game {
     private void useItem() {
         gameBoard.printPlayerBoard();
     }
+
+    public GameBoard getGameBoard() {
+        return gameBoard;
+    }
+
+    public String[] getCOMMANDS() {
+        return COMMANDS;
+    }
 }
