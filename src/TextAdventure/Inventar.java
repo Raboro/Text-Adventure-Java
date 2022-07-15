@@ -20,14 +20,19 @@ public class Inventar {
 
     private static ArrayList<String[]> reloadGui() {
         int counter = 0;
+
+        // loop over 10 lines, every even line is a seperator and the rest are filled
+        // with the inventarElements
         for (int line = 0; line < 10; line++) {
-            if (isLineEven(line)) {
+            if ((line % 2) == 0) {
                 String[] seperator = { "-------------------------" };
                 inventarGui.add(seperator);
             } else {
                 String[] lineElements = {
-                        "|", inventarElements[counter+0], "|", inventarElements[counter+1], "|", inventarElements[counter+2], "|",
-                        inventarElements[counter+3], "|", inventarElements[counter+4], "|", inventarElements[counter+5], "|"
+                        "|", inventarElements[counter + 0], "|", inventarElements[counter + 1], "|",
+                        inventarElements[counter + 2], "|",
+                        inventarElements[counter + 3], "|", inventarElements[counter + 4], "|",
+                        inventarElements[counter + 5], "|"
                 };
                 inventarGui.add(lineElements);
                 counter += 6;
@@ -35,13 +40,5 @@ public class Inventar {
         }
 
         return inventarGui;
-    }
-
-    private static boolean isLineEven(int line) {
-        if ((line % 2) == 0) {
-            return true;
-        }
-
-        return false;
     }
 }
