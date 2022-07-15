@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class Game {
     private GameBoard gameBoard;
-    private final String[] COMMANDS = { "help", "printBoard" };
-    private Runnable[] runMethodByCommand = new Runnable[6];
+    private final String[] COMMANDS = { "help", "printBoard", "left", "right", "up", "down", "printCharacterValues", "printInventar", "getItemInfo", "useItem" };
+    private Runnable[] runMethodByCommand = new Runnable[10];
     private boolean dead = false;
 
     public Game(int level) {
