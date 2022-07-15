@@ -3,6 +3,7 @@ package TextAdventure;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Game {
     private GameBoard gameBoard;
@@ -41,7 +42,7 @@ public class Game {
     private int getUserCommand() {
         try (Scanner userInput = new Scanner(System.in)) {
             while (true) {
-                System.out.println("[Game ~] $  ");
+                System.out.println("\n[Game ~] $  ");
                 String command = userInput.nextLine();
 
                 List<String> commands = Arrays.asList(COMMANDS);
@@ -65,6 +66,7 @@ public class Game {
     }
 
     private void printBoard() {
+        System.out.println("");
         gameBoard.printPlayerBoard();
     }
 
@@ -89,7 +91,15 @@ public class Game {
     }
 
     private void printInventar() {
-        gameBoard.printPlayerBoard();
+        ArrayList<String[]> inventar = Inventar.getGui();
+
+        for (String[] line: inventar) {
+            System.out.println("");
+            for (String element: line) {
+                System.out.print(element);
+            }
+        }
+        System.out.println("");
     }
 
     private void getItemInfo() {
